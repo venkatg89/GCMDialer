@@ -610,6 +610,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3F3DA99748658DBA17EE4DE3 /* Pods-GCMDialer-GCMDialerTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -633,6 +634,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 74CCB46749310EF95F28C0FA /* Pods-GCMDialer-GCMDialerTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = GCMDialerTests/Info.plist;

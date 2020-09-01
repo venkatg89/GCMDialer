@@ -1,157 +1,89 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import 'react-native-gesture-handler';
+import * as React from 'react';
+import { View, Text, Button, Image } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const App: () => React$Node = () => {
+function DetailsScreen() {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-
-          <View style={styles.container}>
-            <View style={styles.logo}>
-              <Text style={styles.sectionTitle}>GCM Dailer</Text>
-            </View>
-            <View style={styles.inputView} >
-              <TextInput style={styles.inputText}
-
-                placeholder="Email"
-                placeholderTextColor="#003f5c"
-
-              />
-
-            </View>
-            <View style={styles.inputView} >
-              <TextInput
-                style={styles.inputText}
-                placeholder="password..."
-                placeholderTextColor="#003f5c"
-              />
-            </View>
-            <TouchableOpacity
-              style={styles.submitButton}
-            >
-              <Text style={styles.submitButtonText}>Login</Text>
-            </TouchableOpacity>
-
-          </View>
-          <TouchableOpacity style={styles.forpass}>
-            <Text style={styles.forgot}>Forgot Password?</Text>
-          </TouchableOpacity>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Details!</Text>
+    </View>
   );
-};
+}
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: '#33adff',
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+    </View>
+  );
+}
 
-  },
-  forpass: {
-    textAlign: 'right',
+function SettingsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+    </View>
+  );
+}
 
+const HomeStack = createStackNavigator();
 
-  },
-  forgot: {
-    textAlign: 'right',
-    textDecorationLine: 'underline',
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: '600',
-    marginRight: 40,
-    marginBottom: 10,
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Home" component={HomeScreen} />
+      <HomeStack.Screen name="Details" component={DetailsScreen} />
+    </HomeStack.Navigator>
+  );
+}
 
+const SettingsStack = createStackNavigator();
 
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#33adff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: "center"
+function SettingsStackScreen() {
+  return (
+    <SettingsStack.Navigator>
+      <SettingsStack.Screen name="Settings" component={SettingsScreen} />
+      <SettingsStack.Screen name="Details" component={DetailsScreen} />
+    </SettingsStack.Navigator>
+  );
+}
 
+const Tab = createBottomTabNavigator();
 
-  },
-  sectionTitle: {
-    fontWeight: "800",
-    color: "#fff",
-    fontSize: 25,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  inputView: {
-    width: "80%",
-    backgroundColor: "#fff",
-
-    height: 50,
-    marginBottom: 20,
-    justifyContent: "center",
-    padding: 20
-  },
-  inputText: {
-    height: 50,
-    color: "#000"
-  },
-  body: {
-    backgroundColor: '#33adff'
-  },
-  submitButton: {
-    width: "80%",
-    backgroundColor: "#00e600",
-
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 10,
-    marginBottom: 10
-  },
-  submitButtonText: {
-    fontWeight: '600',
-    color: '#fff',
-    fontSize: 20,
-
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
-
-export default App;
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen 
+          name="Home" 
+          component={HomeStackScreen} 
+          options={{
+            tabBarLabel: 'Home',
+            tabBarIcon: ({ color, size }) => (
+              undefined
+            ),
+          }}/>
+        <Tab.Screen
+          name="Settings"
+          component={SettingsStackScreen} 
+          options={{
+            tabBarLabel: 'Settings',
+            tabBarIcon: ({ color, size }) => (
+              undefined
+            ),
+          }}/>
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
